@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+    },
+    "variables": {
+        "vnetName": "CPSVNTRRO1",
+        "subnet1Name": "CPSWEBSNET01",
+        "NSG1Name": "CPSWEBSNETNSG01",
+        "vnetAddressPrefix": "10.254.0.0/16",
+        "subnet1Prefix":  "10.254.1.0/24"
+
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-06-15",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[variables('vnetName')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [ "[variables('vnetAddressPrefix')]" ]
+                },
+                "subnets": [
+                    {
+                        "name": "[variables('subnet1Name')]",
+                        "properties": {
+                            "addressPrefix": "[variables('subnet1Prefix')]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSG1Name'))]"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": { }
+}

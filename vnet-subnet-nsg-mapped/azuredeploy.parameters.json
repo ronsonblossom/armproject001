@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": { "value": "CPSVNTRRO1" },
+        "vnetAddressPrefix": { "value": "10.254.0.0/16" },
+        "vnetLocation": {"value": "Australia East"},
+        "subnet1Prefix": { "value": "10.254.1.0/24" },
+        "subnet1Name": { "value": "CPSWEBSNET01" },
+        "NSG1Name": { "value": "CPSWEBSNETNSG01" },
+        "subnet2Prefix": { "value": "10.254.2.0/24" },
+        "subnet2Name": { "value": "CPASDATASNET" },
+        "NSG2Name": { "value": "CPASDATANSG01" },
+        "subnet3Prefix": { "value": "10.254.3.0/24" },
+        "subnet3Name": { "value": "CPSANALYTCSNET01" },
+        "NSG3Name": { "value": "CPSANALYTCSNETNSG01" }
+    }
+}
