@@ -10,10 +10,17 @@
       }
     },
     "vnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/16",
+        "metadata": {
+            "description": "Address prefix"
+        }
+    },
+    "vnetLocation": {
       "type": "string",
-      "defaultValue": "10.0.0.0/16",
+      "defaultValue": "Australia East",
       "metadata": {
-        "description": "Address prefix"
+        "description": "Vnet location"
       }
     },
     "subnet1Prefix": {
@@ -38,10 +45,24 @@
       }
     },
     "subnet2Name": {
+        "type": "string",
+        "defaultValue": "Subnet2",
+        "metadata": {
+            "description": "Subnet 2 Name"
+       }
+    },
+      "subnet3Prefix": {
       "type": "string",
-      "defaultValue": "Subnet2",
+      "defaultValue": "10.0.2.0/24",
       "metadata": {
-        "description": "Subnet 2 Name"
+        "description": "Subnet 3 Prefix"
+      }
+    },
+    "subnet3Name": {
+      "type": "string",
+      "defaultValue": "Subnet3",
+      "metadata": {
+        "description": "Subnet 3 Name"
       }
     }
   },
@@ -53,7 +74,7 @@
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[parameters('vnetName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('vnetLocation')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -67,10 +88,16 @@
               "addressPrefix": "[parameters('subnet1Prefix')]"
             }
           },
-          {
-            "name": "[parameters('subnet2Name')]",
+            {
+                "name": "[parameters('subnet2Name')]",
+                "properties": {
+                    "addressPrefix": "[parameters('subnet2Prefix')]"
+                }
+            },
+            {
+            "name": "[parameters('subnet3Name')]",
             "properties": {
-              "addressPrefix": "[parameters('subnet2Prefix')]"
+              "addressPrefix": "[parameters('subnet3Prefix')]"
             }
           }
         ]
