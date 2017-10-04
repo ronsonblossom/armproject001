@@ -6,7 +6,7 @@
             "value": "australiaeast"
         },
         "virtualMachineName": {
-            "value": "AZAUEMDGPHAPP02"
+            "value": "AZAUEMDGPHAPP04"
         },
         "virtualMachineSize": {
             "value": "Standard_DS3"
@@ -18,13 +18,13 @@
             "value": "CPSVNTRRO1"
         },
         "networkInterfaceName": {
-            "value": "azauemdgphapp02785"
+            "value": "AZAUEMDGPHAPP04nif"
         },
         "adminPassword": {
             "value": "Welcome@12345"
         },
         "availabilitySetName": {
-            "value": "AZAUEMDGPHAPP01-as02"
+            "value": "AZAUEMDGPHAPP04-as04"
         },
         "availabilitySetPlatformFaultDomainCount": {
             "value": "2"
@@ -39,31 +39,16 @@
             "value": "140"
         },
         "OS_publisher": {
-            "value": "tableau"
+            "value": "MicrosoftWindowsServer"
         },
         "OS_offer": {
-            "value": "tableau-server"
+            "value": "WindowsServer"
         },
         "OS_sku": {
-            "value": "bring-your-own-license"
+            "value": "2012-R2-Datacenter"
         },
         "OS_version": {
             "value": "latest"
-        },
-        "plan_name": {
-            "value": "bring-your-own-license"
-        },
-        "plan_publisher": {
-            "value": "tableau"
-        },
-        "plan_product": {
-            "value": "tableau-server"
-        },
-        "loadBalancers_name": {
-            "value": "EYCPASWAF02"
-        },
-        "publicipname": {
-            "value": "EYCPASWAF02-pip" 
         }
     }
 }
