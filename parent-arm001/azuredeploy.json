@@ -2,7 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "nameid": { "type": "string" }
     },
     "variables": {
         "arm001-name": "vnet-subnet-nsg-mapped",
@@ -13,6 +12,22 @@
         "arm002-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-lb-deploy01/azuredeploy.parameters.json"
     },
     "resources": [
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('arm001-name')]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('arm001-tlink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[variables('arm001-plink')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        },
         {
             "apiVersion": "2015-01-01",
             "name": "[variables('arm002-name')]",
