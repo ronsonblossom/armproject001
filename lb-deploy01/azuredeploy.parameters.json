@@ -1,0 +1,9 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "loadBalancers_name": { "value": "EYCPASWAF01" },
+        "publicipname": { "value": "EYCPASWAF01-pip" },
+        "availabilitySetName": {"value": "AZAUEMDGPHAPP01-as01"}
+    }
+}

@@ -102,7 +102,7 @@
                 ]
             }
         },
-                {
+        {
             "apiVersion": "2015-05-01-preview",
             "type": "Microsoft.Network/networkSecurityGroups",
             "name": "[parameters('NSG3Name')]",

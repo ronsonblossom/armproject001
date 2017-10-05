@@ -1,0 +1,102 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "loadBalancers_name": {
+            "type": "string"
+        },
+        "publicipname": {
+            "type": "string"
+        },
+        "availabilitySetName": {
+            "type": "string"
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "name": "[parameters('publicipname')]",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2017-06-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "publicIPAllocationMethod": "Static"
+            }
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers",
+            "name": "[parameters('loadBalancers_name')]",
+            "apiVersion": "2017-09-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('publicipname'))]"
+            ],
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "lbfrontend01",
+                        "properties": {
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicipname'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "lbbackend01",
+                        "properties": {
+                            "backendIPConfigurations": [
+                                {
+                                    "id": "/subscriptions/890e6987-d453-43b2-aa5e-139603074899/resourceGroups/jenkinstestrg01/providers/Microsoft.Network/networkInterfaces/azauemdgphapp01785/ipConfigurations/ipconfig1"
+                                }
+                            ],
+                            "loadBalancingRules": [
+                                { 
+                                    "id": "/subscriptions/890e6987-d453-43b2-aa5e-139603074899/resourceGroups/jenkinstestrg02/providers/Microsoft.Network/loadBalancers/EYCPASWAF01/loadBalancingRules/lbrule01"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "lbprobe",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "port": 443,
+                            "intervalInSeconds": 15,
+                            "numberOfProbes": 2
+                        }
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "name": "lbrule01",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_name')), '/frontendIPConfigurations/lbfrontend01')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_name')), '/backendAddressPools/lbbackend01')]"
+                            },
+                            "probe": {
+                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_name')), '/probes/lbprobe')]"
+                            },
+                            "protocol": "Tcp",
+                            "frontendPort": 80,
+                            "backendPort": 80,
+                            "idleTimeoutInMinutes": 15
+                        }
+
+                    }
+                ]
+            }
+
+        }
+
+    ],
+    "outputs": {
+    }
+}

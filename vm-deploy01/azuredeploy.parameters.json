@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "australiaeast"
+        },
+        "virtualMachineName": {
+            "value": "AZAUEMDGPHAPP01"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS3"
+        },
+        "adminUsername": {
+            "value": "vmadmin"
+        },
+        "virtualNetworkName": {
+            "value": "CPSVNTRRO1"
+        },
+        "networkInterfaceName": {
+            "value": "azauemdgphapp01785"
+        },
+        "adminPassword": {
+            "value": "Welcome@12345"
+        },
+        "availabilitySetName": {
+            "value": "AZAUEMDGPHAPP01-as01"
+        },
+        "availabilitySetPlatformFaultDomainCount": {
+            "value": "2"
+        },
+        "availabilitySetPlatformUpdateDomainCount": {
+            "value": "5"
+        },
+        "diagnosticsStorageAccountName": {
+            "value": "adevm01diag001"
+        },
+        "diagnosticsStorageAccountId": {
+            "value": "/subscriptions/890e6987-d453-43b2-aa5e-139603074899/resourceGroups/diskencryptiontest/providers/Microsoft.Storage/storageAccounts/adevm01diag001"
+        },
+        "subnetName": {
+            "value": "CPSWEBSNET01"
+        },
+        "sizeOfEachDataDiskInGB": {
+            "value": "140" 
+        }
+    }
+}
