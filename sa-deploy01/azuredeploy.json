@@ -1,0 +1,55 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sku-type": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_ZRS",
+                "Standard_GRS",
+                "Standard_RAGRS",
+                "Premium_LRS"
+            ]
+        },
+        "sa-name": {
+            "type": "string"
+        },
+        "sa-type": {
+            "type": "string",
+            "defaultValue": "Storage",
+            "allowedValues": [
+                "Storage",
+                "BlobStorage"
+                    ]
+        }
+    },
+    "variables": { },
+    "resources": [
+        {
+            "name": "[parameters('sa-name')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2017-06-01",
+            "sku": {
+                "name": "[parameters('sku-type')]"
+            },
+            "kind": "[parameters('sa-type')]",
+            "dependsOn": [ ],
+            "tags": {
+                "displayName": "[parameters('sa-name')]"
+            },
+            "properties": {
+                "encryption": {
+                    "services": {
+                        "blob": {
+                            "enabled": "true"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+  "outputs": {}
+}
