@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "nameid": { "type": "string" }
+    },
+    "variables": {
+        "arm001-name": "vnet-subnet-nsg-mapped",
+        "arm001-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vnet-subnet-nsg-mapped/azuredeploy.json",
+        "arm001-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vnet-subnet-nsg-mapped/azuredeploy.parameters.json",
+        "arm002-name": "vm-lb-deploy01",
+        "arm002-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-lb-deploy01/azuredeploy.json",
+        "arm002-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-lb-deploy01/azuredeploy.parameters.json"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('arm002-name')]",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [],
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('arm002-tlink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[variables('arm002-plink')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        }
+    ],
+    "outputs": {
+    }
+}

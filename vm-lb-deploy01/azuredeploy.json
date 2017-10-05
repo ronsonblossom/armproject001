@@ -68,7 +68,7 @@
 
     },
     "variables": {
-        "vnetId": "[resourceId('jenkinstestrg001','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
         "lbfrontend": "[concat(parameters('loadBalancers_name'), 'lbfrontend01')]",
         "lbbackend": "[concat(parameters('loadBalancers_name'), 'lbbackend01')]",
