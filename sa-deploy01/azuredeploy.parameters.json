@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "sa-name": {
-            "value": "eycpasvmsa06"
+            "value": "eycpasvmsa02"
         },
         "sku-type": {
             "value": "Standard_GRS"
