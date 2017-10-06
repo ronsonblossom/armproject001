@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "australiaeast"
+        },
+        "virtualMachineName": {
+            "value": "AZAUEMDGPHAPP04"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS3"
+        },
+        "adminUsername": {
+            "value": "vmadmin"
+        },
+        "virtualNetworkName": {
+            "value": "CPSVNTRRO1"
+        },
+        "adminPassword": {
+            "value": "Welcome@12345"
+        },
+        "subnetName": {
+            "value": "CPSANALYTCSNET01"
+        },
+        "sizeOfEachDataDiskInGB": {
+            "value": "140"
+        },
+        "OS_publisher": {
+            "value": "MicrosoftWindowsServer"
+        },
+        "OS_offer": {
+            "value": "WindowsServer"
+        },
+        "OS_sku": {
+            "value": "2012-R2-Datacenter"
+        },
+        "OS_version": {
+            "value": "latest"
+        }
+    }
+}
