@@ -6,7 +6,7 @@
             "value": "australiaeast"
         },
         "virtualMachineName": {
-            "value": "AZAUEMDGPHAPP04"
+            "value": "AZAUEMDGPHAPP01"
         },
         "virtualMachineSize": {
             "value": "Standard_DS3"
@@ -17,20 +17,8 @@
         "virtualNetworkName": {
             "value": "CPSVNTRRO1"
         },
-        "networkInterfaceName": {
-            "value": "AZAUEMDGPHAPP04nif"
-        },
         "adminPassword": {
             "value": "Welcome@12345"
-        },
-        "availabilitySetName": {
-            "value": "AZAUEMDGPHAPP04-as04"
-        },
-        "availabilitySetPlatformFaultDomainCount": {
-            "value": "2"
-        },
-        "availabilitySetPlatformUpdateDomainCount": {
-            "value": "5"
         },
         "subnetName": {
             "value": "CPSWEBSNET01"

@@ -17,20 +17,8 @@
         "virtualNetworkName": {
             "type": "string"
         },
-        "networkInterfaceName": {
-            "type": "string"
-        },
         "adminPassword": {
             "type": "securestring"
-        },
-        "availabilitySetName": {
-            "type": "string"
-        },
-        "availabilitySetPlatformFaultDomainCount": {
-            "type": "string"
-        },
-        "availabilitySetPlatformUpdateDomainCount": {
-            "type": "string"
         },
         "subnetName": {
             "type": "string"
@@ -53,7 +41,13 @@
     },
     "variables": {
         "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
+        "networkInterfaceName": "[concat(parameters('virtualMachineName'), '_if01')]",
+        "availabilitySetName": "[concat(parameters('virtualMachineName'), '_av01')]",
+        "availabilitySetPlatformFaultDomainCount": "2",
+        "availabilitySetPlatformUpdateDomainCount": "5"
+
+
 
     },
     "resources": [
@@ -63,8 +57,8 @@
             "apiVersion": "2016-04-30-preview",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]",
-                "[concat('Microsoft.Compute/availabilitySets/', parameters('availabilitySetName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]",
+                "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
             ],
             "properties": {
                 "osProfile": {
@@ -102,28 +96,28 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
                         }
                     ]
                 },
                 "availabilitySet": {
-                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySetName'))]"
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
                 }
             }
         },
         {
-            "name": "[parameters('availabilitySetName')]",
+            "name": "[variables('availabilitySetName')]",
             "type": "Microsoft.Compute/availabilitySets",
             "apiVersion": "2016-04-30-preview",
             "location": "[parameters('location')]",
             "properties": {
-                "platformFaultDomainCount": "[parameters('availabilitySetPlatformFaultDomainCount')]",
-                "platformUpdateDomainCount": "[parameters('availabilitySetPlatformUpdateDomainCount')]",
+                "platformFaultDomainCount": "[variables('availabilitySetPlatformFaultDomainCount')]",
+                "platformUpdateDomainCount": "[variables('availabilitySetPlatformUpdateDomainCount')]",
                 "managed": true
             }
         },
         {
-            "name": "[parameters('networkInterfaceName')]",
+            "name": "[variables('networkInterfaceName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2016-09-01",
             "location": "[parameters('location')]",

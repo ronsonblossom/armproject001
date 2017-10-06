@@ -32,7 +32,9 @@
             "apiVersion": "2015-01-01",
             "name": "[variables('arm002-name')]",
             "type": "Microsoft.Resources/deployments",
-            "dependsOn": [],
+            "dependsOn": [
+                "[concat('Microsoft.Resources/deployments/', variables('arm001-name'))]"
+            ],
             "properties": {
                 "mode": "incremental",
                 "templateLink": {

@@ -17,20 +17,8 @@
         "virtualNetworkName": {
             "type": "string"
         },
-        "networkInterfaceName": {
-            "type": "string"
-        },
         "adminPassword": {
             "type": "securestring"
-        },
-        "availabilitySetName": {
-            "type": "string"
-        },
-        "availabilitySetPlatformFaultDomainCount": {
-            "type": "string"
-        },
-        "availabilitySetPlatformUpdateDomainCount": {
-            "type": "string"
         },
         "subnetName": {
             "type": "string"
@@ -59,9 +47,6 @@
         "plan_product": {
             "type": "string"
         },
-        "publicipname": {
-            "type": "string"
-        },
         "loadBalancers_name": {
             "type": "string"
         }
@@ -70,6 +55,11 @@
     "variables": {
         "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
+        "networkInterfaceName": "[concat(parameters('virtualMachineName'), '_if01')]",
+        "availabilitySetName": "[concat(parameters('virtualMachineName'), '_av01')]",
+        "availabilitySetPlatformFaultDomainCount": "2",
+        "availabilitySetPlatformUpdateDomainCount": "5",
+        "publicipname": "[concat(parameters('loadBalancers_name'), '_pip01')]",
         "lbfrontend": "[concat(parameters('loadBalancers_name'), 'lbfrontend01')]",
         "lbbackend": "[concat(parameters('loadBalancers_name'), 'lbbackend01')]",
         "lbprobe": "[concat(parameters('loadBalancers_name'), 'lbprobe01')]",
@@ -77,7 +67,7 @@
     },
     "resources": [
         {
-            "name": "[parameters('publicipname')]",
+            "name": "[variables('publicipname')]",
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2017-06-01",
             "location": "[resourceGroup().location]",
@@ -91,7 +81,7 @@
             "apiVersion": "2017-09-01",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('publicipname'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicipname'))]"
             ],
             "properties": {
                 "frontendIPConfigurations": [
@@ -99,7 +89,7 @@
                         "name": "[variables('lbfrontend')]",
                         "properties": {
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicipname'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicipname'))]"
                             }
                         }
                     }
@@ -150,8 +140,8 @@
             "apiVersion": "2016-04-30-preview",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]",
-                "[concat('Microsoft.Compute/availabilitySets/', parameters('availabilitySetName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]",
+                "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
             ],
             "properties": {
                 "osProfile": {
@@ -189,12 +179,12 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
                         }
                     ]
                 },
                 "availabilitySet": {
-                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySetName'))]"
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
                 }
             },
             "plan": {
@@ -204,18 +194,18 @@
             }
         },
         {
-            "name": "[parameters('availabilitySetName')]",
+            "name": "[variables('availabilitySetName')]",
             "type": "Microsoft.Compute/availabilitySets",
             "apiVersion": "2016-04-30-preview",
             "location": "[parameters('location')]",
             "properties": {
-                "platformFaultDomainCount": "[parameters('availabilitySetPlatformFaultDomainCount')]",
-                "platformUpdateDomainCount": "[parameters('availabilitySetPlatformUpdateDomainCount')]",
+                "platformFaultDomainCount": "[variables('availabilitySetPlatformFaultDomainCount')]",
+                "platformUpdateDomainCount": "[variables('availabilitySetPlatformUpdateDomainCount')]",
                 "managed": true
             }
         },
         {
-            "name": "[parameters('networkInterfaceName')]",
+            "name": "[variables('networkInterfaceName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2016-09-01",
             "location": "[parameters('location')]",
