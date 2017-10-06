@@ -7,9 +7,30 @@
         "arm001-name": "vnet-subnet-nsg-mapped",
         "arm001-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vnet-subnet-nsg-mapped/azuredeploy.json",
         "arm001-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vnet-subnet-nsg-mapped/azuredeploy.parameters.json",
-        "arm002-name": "vm-lb-deploy01",
-        "arm002-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-lb-deploy01/azuredeploy.json",
-        "arm002-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-lb-deploy01/azuredeploy.parameters.json"
+
+        "arm002-name": "loadbalancer-vm-tableau",
+        "arm002-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-lb-deploy001/azuredeploy.json",
+        "arm002-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-lb-deploy001/azuredeploy.parameters_tableau.json",
+
+        "arm003-name": "vm-baston-host",
+        "arm003-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-deploy001/azuredeploy.json",
+        "arm003-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-deploy001/azuredeploy.parameters_Bastion_Host.json",
+
+        "arm004-name": "vm-data-base",
+        "arm004-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-deploy001/azuredeploy.json",
+        "arm004-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-deploy001/azuredeploy.parameters_data_base.json",
+
+        "arm005-name": "vm-data-science",
+        "arm005-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-deploy001/azuredeploy.json",
+        "arm005-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-deploy001/azuredeploy.parameters_data_science.json",
+
+        "arm006-name": "vm-active-directory",
+        "arm006-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-deploy001/azuredeploy.json",
+        "arm006-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/vm-deploy001/azuredeploy.parameters_active_directory.json",
+
+        "arm007-name": "sa-deployment",
+        "arm007-tlink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/sa-deploy01/azuredeploy.json",
+        "arm007-plink": "https://raw.githubusercontent.com/ronsonblossom/armproject001/master/sa-deploy01/azuredeploy.parameters.json"
     },
     "resources": [
         {
@@ -43,6 +64,98 @@
                 },
                 "parametersLink": {
                     "uri": "[variables('arm002-plink')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('arm003-name')]",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[concat('Microsoft.Resources/deployments/', variables('arm001-name'))]"
+            ],
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('arm003-tlink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[variables('arm003-plink')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('arm004-name')]",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[concat('Microsoft.Resources/deployments/', variables('arm001-name'))]"
+            ],
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('arm004-tlink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[variables('arm004-plink')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('arm005-name')]",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[concat('Microsoft.Resources/deployments/', variables('arm001-name'))]"
+            ],
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('arm005-tlink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[variables('arm005-plink')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('arm006-name')]",
+            "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[concat('Microsoft.Resources/deployments/', variables('arm001-name'))]"
+            ],
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('arm006-tlink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[variables('arm006-plink')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('arm007-name')]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[variables('arm007-tlink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "[variables('arm007-plink')]",
                     "contentVersion": "1.0.0.0"
                 }
             }

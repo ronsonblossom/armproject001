@@ -6,7 +6,7 @@
             "value": "australiaeast"
         },
         "virtualMachineName": {
-            "value": "AZAUEMDGPHAPP01"
+            "value": "AZAUEMDGPHAPP00"
         },
         "virtualMachineSize": {
             "value": "Standard_DS3"
